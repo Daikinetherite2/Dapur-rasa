@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FoodVerse | Premium Food Delivery</title>
-
-<link rel="stylesheet" href="style.css">
+<title>FoodVerse v2</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +12,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -24,19 +24,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <div id="loader">
 
-<div class="loader-logo">
-
-🍔
-
-</div>
+<div class="loader-circle"></div>
 
 <h2>FoodVerse</h2>
-
-<div class="loading-bar">
-
-<div class="loading-progress"></div>
-
-</div>
 
 </div>
 
@@ -52,15 +42,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 </div>
 
-<ul>
+<ul id="navMenu">
 
-<li><a href="#home">Home</a></li>
+<li><a href="#">Home</a></li>
 
 <li><a href="#menu">Menu</a></li>
 
 <li><a href="#promo">Promo</a></li>
-
-<li><a href="#about">About</a></li>
 
 <li><a href="#contact">Contact</a></li>
 
@@ -68,7 +56,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <div class="nav-right">
 
-<button id="darkMode">
+<button id="darkBtn">
 
 <i class="fa-solid fa-moon"></i>
 
@@ -82,6 +70,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 </button>
 
+<button id="menuBtn">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
 </div>
 
 </nav>
@@ -90,41 +84,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <!-- ================= HERO ================= -->
 
-<section class="hero" id="home">
-
-<div class="blob blob1"></div>
-
-<div class="blob blob2"></div>
-
-<div class="blob blob3"></div>
+<section class="hero">
 
 <div class="hero-left">
 
-<span class="badge">
+<span class="tag">
 
-🔥 Delivery tercepat hari ini
+🔥 Fast Delivery
 
 </span>
 
 <h1>
 
-Food Delivered
+Hungry?
 
-<span>
+Order Your
 
-Beyond Imagination
-
-</span>
+<span>Favorite Food</span>
 
 </h1>
 
 <p>
 
-Cari makanan favoritmu.
-
-Order dalam hitungan detik.
-
-Langsung checkout ke WhatsApp tanpa ribet.
+Nikmati makanan favoritmu dengan pengiriman cepat,
+harga terjangkau, dan rasa yang bikin nagih.
 
 </p>
 
@@ -133,58 +116,25 @@ Langsung checkout ke WhatsApp tanpa ribet.
 <i class="fa-solid fa-magnifying-glass"></i>
 
 <input
-
 type="text"
-
-placeholder="Cari makanan..."
-
 id="searchInput"
-
->
+placeholder="Cari makanan...">
 
 </div>
 
-<div class="hero-buttons">
+<div class="hero-btn">
 
 <button class="primary">
 
-Order Sekarang
+Order Now
 
 </button>
 
 <button class="secondary">
 
-Lihat Menu
+See Menu
 
 </button>
-
-</div>
-
-<div class="stats">
-
-<div>
-
-<h2>50K+</h2>
-
-<span>Happy Customer</span>
-
-</div>
-
-<div>
-
-<h2>150+</h2>
-
-<span>Menu</span>
-
-</div>
-
-<div>
-
-<h2>4.9★</h2>
-
-<span>Rating</span>
-
-</div>
 
 </div>
 
@@ -192,21 +142,9 @@ Lihat Menu
 
 <div class="hero-right">
 
-<div class="floating-card top">
+<div class="hero-food">
 
-🚚 10 Menit
-
-</div>
-
-<div class="food-circle">
-
-🍜
-
-</div>
-
-<div class="floating-card bottom">
-
-⭐ Best Seller
+🍕🍔🍟🥤
 
 </div>
 
@@ -220,7 +158,7 @@ Lihat Menu
 
 <h2>
 
-Popular Category
+Popular Categories
 
 </h2>
 
@@ -230,7 +168,7 @@ Popular Category
 
 🍔
 
-<span>Burger</span>
+<p>Burger</p>
 
 </div>
 
@@ -238,15 +176,7 @@ Popular Category
 
 🍕
 
-<span>Pizza</span>
-
-</div>
-
-<div class="cat">
-
-🍜
-
-<span>Noodles</span>
+<p>Pizza</p>
 
 </div>
 
@@ -254,7 +184,7 @@ Popular Category
 
 🍗
 
-<span>Chicken</span>
+<p>Chicken</p>
 
 </div>
 
@@ -262,424 +192,10 @@ Popular Category
 
 🥤
 
-<span>Drinks</span>
-
-</div>
-
-<div class="cat">
-
-🍰
-
-<span>Dessert</span>
+<p>Drink</p>
 
 </div>
 
 </div>
 
 </section>
-
-<!-- ================= PROMO ================= -->
-
-<section class="promo" id="promo">
-
-<div class="promo-card">
-
-<div>
-
-<h1>
-
-40% OFF
-
-</h1>
-
-<p>
-
-Untuk seluruh menu hari ini
-
-</p>
-
-<button>
-
-Claim Now
-
-</button>
-
-</div>
-
-<div class="countdown">
-
-<h2>
-
-02 : 15 : 54
-
-</h2>
-
-<span>
-
-Promo Ends Soon
-
-</span>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= MENU ================= -->
-
-<section class="menu" id="menu">
-
-<h2>
-
-Popular Menu
-
-</h2>
-
-<div class="menu-grid">
-
-
-<!-- ================= MENU CARD 1 ================= -->
-
-<div class="food-card">
-
-<div class="discount">20% OFF</div>
-
-<div class="food-icon">
-🍔
-</div>
-
-<h3>Cheese Burger</h3>
-
-<p>
-Burger premium dengan double cheese.
-</p>
-
-<div class="rating">
-
-⭐ 4.9
-
-<span>(1.2k)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 18.90</h2>
-
-<button class="add-cart"
-data-name="Cheese Burger"
-data-price="18.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= MENU CARD 2 ================= -->
-
-<div class="food-card">
-
-<div class="food-icon">
-🍕
-
-</div>
-
-<h3>Pepperoni Pizza</h3>
-
-<p>
-Pizza oven stone baked.
-</p>
-
-<div class="rating">
-
-⭐ 4.8
-
-<span>(900)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 28.90</h2>
-
-<button class="add-cart"
-data-name="Pepperoni Pizza"
-data-price="28.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= MENU CARD 3 ================= -->
-
-<div class="food-card">
-
-<div class="best">
-
-BEST SELLER
-
-</div>
-
-<div class="food-icon">
-
-🍜
-
-</div>
-
-<h3>Ramen</h3>
-
-<p>
-
-Japanese spicy ramen.
-
-</p>
-
-<div class="rating">
-
-⭐ 5.0
-
-<span>(3.5k)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 22.90</h2>
-
-<button class="add-cart"
-data-name="Ramen"
-data-price="22.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= MENU CARD 4 ================= -->
-
-<div class="food-card">
-
-<div class="food-icon">
-
-🍗
-
-</div>
-
-<h3>Fried Chicken</h3>
-
-<p>
-
-Extra crispy chicken.
-
-</p>
-
-<div class="rating">
-
-⭐ 4.8
-
-<span>(2.3k)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 15.90</h2>
-
-<button class="add-cart"
-data-name="Fried Chicken"
-data-price="15.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= MENU CARD 5 ================= -->
-
-<div class="food-card">
-
-<div class="food-icon">
-
-🥩
-
-</div>
-
-<h3>Wagyu Steak</h3>
-
-<p>
-
-Premium A5 Wagyu.
-
-</p>
-
-<div class="rating">
-
-⭐ 5.0
-
-<span>(800)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 189.90</h2>
-
-<button class="add-cart"
-data-name="Wagyu Steak"
-data-price="189.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= MENU CARD 6 ================= -->
-
-<div class="food-card">
-
-<div class="food-icon">
-
-🥤
-
-</div>
-
-<h3>Milkshake</h3>
-
-<p>
-
-Chocolate Premium.
-
-</p>
-
-<div class="rating">
-
-⭐ 4.9
-
-<span>(1.5k)</span>
-
-</div>
-
-<div class="price-row">
-
-<h2>RM 10.90</h2>
-
-<button class="add-cart"
-data-name="Milkshake"
-data-price="10.90">
-
-+
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ================= FREE DELIVERY ================= -->
-
-<section class="delivery">
-
-<h2>
-
-🎁 Free Delivery Progress
-
-</h2>
-
-<div class="progress-box">
-
-<div class="progress">
-
-<div class="progress-fill">
-
-</div>
-
-</div>
-
-<p>
-
-Tambah RM 25 lagi untuk dapat Free Delivery 🚚
-
-</p>
-
-</div>
-
-</section>
-
-<!-- ================= CART ================= -->
-
-<div class="cart-sidebar"
-
-id="cartSidebar">
-
-<div class="cart-header">
-
-<h2>
-
-Your Cart
-
-</h2>
-
-<button id="closeCart">
-
-×
-
-</button>
-
-</div>
-
-<div id="cartItems">
-
-<p>
-
-Belum ada pesanan.
-
-</p>
-
-</div>
-
-<div class="cart-total">
-
-<h3>
-
-Total
-
-<span id="totalPrice">
-
-RM 0
-
-</span>
-
-</h3>
-
-<button id="checkout">
-
-Checkout WhatsApp
-
-</button>
-
-</div>
-
-</div>
-
-<div id="overlay"></div>
