@@ -1,42 +1,44 @@
 // ================= LOADER =================
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
-setTimeout(()=>{
+const loader = document.getElementById("loader");
 
-document.getElementById("loader").style.opacity="0";
+setTimeout(() => {
 
-setTimeout(()=>{
+loader.style.opacity = "0";
 
-document.getElementById("loader").style.display="none";
+loader.style.pointerEvents = "none";
+
+setTimeout(() => {
+
+loader.remove();
 
 },500);
 
-},1800);
+},1000);
 
 });
 
 // ================= DARK MODE =================
 
-const darkBtn=document.getElementById("darkMode");
+const darkBtn = document.getElementById("darkBtn");
 
 darkBtn.addEventListener("click",()=>{
 
 document.body.classList.toggle("dark");
 
-if(document.body.classList.contains("dark")){
+localStorage.setItem(
 
-localStorage.setItem("theme","dark");
+"theme",
 
-}else{
+document.body.classList.contains("dark")
 
-localStorage.setItem("theme","light");
-
-}
+);
 
 });
 
-if(localStorage.getItem("theme")==="dark"){
+if(localStorage.getItem("theme")==="true"){
 
 document.body.classList.add("dark");
 
@@ -44,19 +46,27 @@ document.body.classList.add("dark");
 
 // ================= SEARCH =================
 
-const search=document.getElementById("searchInput");
+const search = document.getElementById("searchInput");
 
-const cards=document.querySelectorAll(".food-card");
+const foods = document.querySelectorAll(".food-card");
 
 search.addEventListener("keyup",()=>{
 
-const value=search.value.toLowerCase();
+const value = search.value.toLowerCase();
 
-cards.forEach(card=>{
+foods.forEach(food=>{
 
-const text=card.innerText.toLowerCase();
+food.style.display =
 
-card.style.display=text.includes(value)?"block":"none";
+food.innerText.toLowerCase().includes(value)
+
+?
+
+"block"
+
+:
+
+"none";
 
 });
 
@@ -70,8 +80,6 @@ const cartBtn=document.getElementById("cartBtn");
 
 const cartSide=document.getElementById("cartSidebar");
 
-const overlay=document.getElementById("overlay");
-
 const closeCart=document.getElementById("closeCart");
 
 const cartItems=document.getElementById("cartItems");
@@ -82,49 +90,35 @@ const cartCount=document.getElementById("cartCount");
 
 cartBtn.onclick=()=>{
 
-cartSide.classList.add("active");
-
-overlay.classList.add("active");
+cartSide.classList.add("show");
 
 }
 
 closeCart.onclick=()=>{
 
-cartSide.classList.remove("active");
-
-overlay.classList.remove("active");
+cartSide.classList.remove("show");
 
 }
-
-overlay.onclick=()=>{
-
-cartSide.classList.remove("active");
-
-overlay.classList.remove("active");
-
-}
-
-// ================= ADD CART =================
 
 document.querySelectorAll(".add-cart").forEach(btn=>{
 
-btn.addEventListener("click",()=>{
-
-const name=btn.dataset.name;
-
-const price=parseFloat(btn.dataset.price);
+btn.onclick=()=>{
 
 cart.push({
 
-name,
+name:btn.dataset.name,
 
-price
+price:Number(btn.dataset.price)
 
 });
 
 updateCart();
 
-});
+showToast();
+
+saveCart();
+
+}
 
 });
 
@@ -134,7 +128,7 @@ cartItems.innerHTML="";
 
 let total=0;
 
-cart.forEach(item=>{
+cart.forEach((item,index)=>{
 
 total+=item.price;
 
@@ -144,11 +138,19 @@ cartItems.innerHTML+=`
 
 <div>
 
-<h4>${item.name}</h4>
+<b>${item.name}</b>
 
-<p>RM ${item.price.toFixed(2)}</p>
+<br>
+
+RM ${item.price.toFixed(2)}
 
 </div>
+
+<button onclick="removeItem(${index})">
+
+❌
+
+</button>
 
 </div>
 
@@ -156,259 +158,32 @@ cartItems.innerHTML+=`
 
 });
 
-totalPrice.innerHTML="RM "+total.toFixed(2);
-
-cartCount.innerHTML=cart.length;
-
-  }
-// ================= CHECKOUT WHATSAPP =================
-
-const checkout=document.getElementById("checkout");
-
-checkout.addEventListener("click",()=>{
-
 if(cart.length===0){
 
-alert("Keranjang masih kosong!");
+cartItems.innerHTML=
 
-return;
-
-}
-
-let message="Halo FoodVerse,%0A%0ASaya ingin memesan:%0A%0A";
-
-let total=0;
-
-cart.forEach((item,index)=>{
-
-message+=`${index+1}. ${item.name} - RM ${item.price.toFixed(2)}%0A`;
-
-total+=item.price;
-
-});
-
-message+=`%0A====================%0A`;
-
-message+=`Total : RM ${total.toFixed(2)}%0A`;
-
-message+=`%0ATerima kasih.`;
-
-window.open(
-
-`https://wa.me/60186671256?text=${message}`,
-
-"_blank"
-
-);
-
-});
-
-// ================= BACK TO TOP =================
-
-const topBtn=document.getElementById("backTop");
-
-window.addEventListener("scroll",()=>{
-
-if(window.scrollY>300){
-
-topBtn.style.display="flex";
-
-}else{
-
-topBtn.style.display="none";
+"<p>Keranjang masih kosong.</p>";
 
 }
 
-});
+totalPrice.innerHTML=
 
-topBtn.addEventListener("click",()=>{
+"RM "+total.toFixed(2);
 
-window.scrollTo({
+cartCount.innerHTML=
 
-top:0,
-
-behavior:"smooth"
-
-});
-
-});
-
-// ================= SCROLL REVEAL =================
-
-const revealItems=document.querySelectorAll(
-
-".food-card,.cat,.promo-card,.about,.contact,.delivery"
-
-);
-
-function reveal(){
-
-revealItems.forEach(item=>{
-
-const top=item.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-
-item.classList.add("active");
+cart.length;
 
 }
 
-});
+function removeItem(index){
 
-}
-
-window.addEventListener("scroll",reveal);
-
-reveal();
-
-// ================= RIPPLE EFFECT =================
-
-document.querySelectorAll("button").forEach(button=>{
-
-button.addEventListener("click",function(e){
-
-const ripple=document.createElement("span");
-
-ripple.className="ripple";
-
-const rect=this.getBoundingClientRect();
-
-ripple.style.left=e.clientX-rect.left+"px";
-
-ripple.style.top=e.clientY-rect.top+"px";
-
-this.appendChild(ripple);
-
-setTimeout(()=>{
-
-ripple.remove();
-
-},600);
-
-});
-
-});
-
-// ================= COUNTDOWN =================
-
-let hour=2;
-
-let minute=15;
-
-let second=54;
-
-const timer=document.querySelector(".countdown h2");
-
-setInterval(()=>{
-
-second--;
-
-if(second<0){
-
-second=59;
-
-minute--;
-
-}
-
-if(minute<0){
-
-minute=59;
-
-hour--;
-
-}
-
-if(hour<0){
-
-hour=23;
-
-}
-
-timer.innerHTML=
-
-`${String(hour).padStart(2,"0")} : ${String(minute).padStart(2,"0")} : ${String(second).padStart(2,"0")}`;
-
-},1000);
-
-// ================= FREE DELIVERY BAR =================
-
-let progress=70;
-
-const progressBar=document.querySelector(".progress-fill");
-
-setInterval(()=>{
-
-progress++;
-
-if(progress>=100){
-
-progress=70;
-
-}
-
-progressBar.style.width=progress+"%";
-
-},120);
-
-// ================= LOCAL STORAGE =================
-
-function saveCart(){
-
-localStorage.setItem(
-
-"foodverse-cart",
-
-JSON.stringify(cart)
-
-);
-
-}
-
-function loadCart(){
-
-const data=localStorage.getItem("foodverse-cart");
-
-if(data){
-
-const items=JSON.parse(data);
-
-items.forEach(item=>cart.push(item));
+cart.splice(index,1);
 
 updateCart();
 
-}
+saveCart();
 
 }
 
-loadCart();
-
-document.querySelectorAll(".add-cart").forEach(btn=>{
-
-btn.addEventListener("click",saveCart);
-
-});
-
-// ================= SMALL EFFECT =================
-
-document.addEventListener("mousemove",(e)=>{
-
-document.documentElement.style.setProperty(
-
-"--mouseX",
-
-e.clientX+"px"
-
-);
-
-document.documentElement.style.setProperty(
-
-"--mouseY",
-
-e.clientY+"px"
-
-);
-
-});
-
-console.log("🍔 FoodVerse Premium Loaded Successfully!");
+window.removeItem=removeItem;
