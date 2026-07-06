@@ -187,3 +187,192 @@ saveCart();
 }
 
 window.removeItem=removeItem;
+// ================= LOCAL STORAGE =================
+
+function saveCart(){
+
+localStorage.setItem(
+
+"foodverse-cart",
+
+JSON.stringify(cart)
+
+);
+
+}
+
+function loadCart(){
+
+const data=
+
+localStorage.getItem("foodverse-cart");
+
+if(data){
+
+const items=JSON.parse(data);
+
+items.forEach(item=>cart.push(item));
+
+updateCart();
+
+}
+
+}
+
+loadCart();
+
+// ================= CHECKOUT =================
+
+const checkoutBtn=
+
+document.getElementById("checkoutBtn");
+
+checkoutBtn.addEventListener("click",()=>{
+
+if(cart.length===0){
+
+alert("Keranjang masih kosong!");
+
+return;
+
+}
+
+let text="Halo FoodVerse!%0A%0ASaya ingin memesan:%0A";
+
+let total=0;
+
+cart.forEach((item,i)=>{
+
+text+=`${i+1}. ${item.name} - RM ${item.price.toFixed(2)}%0A`;
+
+total+=item.price;
+
+});
+
+text+=`%0ATotal : RM ${total.toFixed(2)}`;
+
+window.open(
+
+`https://wa.me/60186671256?text=${text}`,
+
+"_blank"
+
+);
+
+});
+
+// ================= TOAST =================
+
+const toast=
+
+document.getElementById("toast");
+
+function showToast(){
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2000);
+
+}
+
+// ================= BACK TO TOP =================
+
+const topBtn=
+
+document.getElementById("backTop");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>250){
+
+topBtn.style.display="block";
+
+}else{
+
+topBtn.style.display="none";
+
+}
+
+});
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+// ================= MOBILE MENU =================
+
+const menuBtn=
+
+document.getElementById("menuBtn");
+
+const navMenu=
+
+document.getElementById("navMenu");
+
+menuBtn.onclick=()=>{
+
+if(navMenu.style.display==="flex"){
+
+navMenu.style.display="none";
+
+}else{
+
+navMenu.style.display="flex";
+
+navMenu.style.flexDirection="column";
+
+navMenu.style.position="absolute";
+
+navMenu.style.top="70px";
+
+navMenu.style.right="20px";
+
+navMenu.style.background="white";
+
+navMenu.style.padding="20px";
+
+navMenu.style.borderRadius="15px";
+
+navMenu.style.boxShadow="0 10px 20px rgba(0,0,0,.15)";
+
+}
+
+};
+
+// ================= PROGRESS =================
+
+const progress=
+
+document.querySelector(".progress-fill");
+
+let width=70;
+
+setInterval(()=>{
+
+width++;
+
+if(width>100){
+
+width=70;
+
+}
+
+progress.style.width=width+"%";
+
+},200);
+
+// ================= FINISH =================
+
+console.log("🍔 FoodVerse v2 Lite Loaded Successfully!");
