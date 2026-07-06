@@ -376,3 +376,6 @@ progress.style.width=width+"%";
 // ================= FINISH =================
 
 console.log("🍔 FoodVerse v2 Lite Loaded Successfully!");
+<script src="script.js"></script>
+</body>
+</html>
